@@ -1,0 +1,21 @@
+import re
+import sys
+
+from stanfordcorenlp import StanfordCoreNLP
+
+nlp = StanfordCoreNLP('/Volumes/Research/double_propagation/script/', lang="en")
+
+if __name__ == '__main__':
+  f = open('../amazon/automotive/reviewText_automotive.txt','r')
+  lines = f.readlines()
+  g = open('../amazon/automotive/reviewText_automotive.tok.txt', 'w')
+  for line in lines :
+  	token_sent = nlp.word_tokenize(line)
+  	tokens = [nlp._convert(token).lower() for token in token_sent]
+  	l = ''
+  	l += ' '.join(tokens)
+  	l += '\n'
+  	g.write(l)
+
+  f.close()
+  g.close()
